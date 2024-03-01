@@ -11,26 +11,24 @@ static func createConfig():
 	var file = FileAccess.open('res://vmf.config.json', FileAccess.WRITE);
 
 	var defaultConfig = {
-	"entitiesFolder": "res://addons/godotvmf/entities/",
-	"gameInfoPath": "S:/SteamLibrary/steamapps/common/Team Fortress 2/hl2/",
-	"instancesFolder": "res://addons/godotvmf/instances/",
-	"materialsFolder": "res://addons/godotvmf/materals/",
-	"mdl2obj": "C:/Users/LeV73/Desktop/Godot/abberation-game-jam/addons/godotvmf/3rdparty/mdl2obj/",
-	"modelsFolder": "res://addons/godotvmf/models/",
-	"nodeConfig": {
-		"defaultTextureSize": 512,
-		"fallbackMaterial": null,
-		"generateCollision": true,
-		"generateCollisionForModel": true,
-		"ignoreTextures": [
-			"TOOLS/TOOLSNODRAW"
-		],
-		"importModels": false,
-		"importScale": 0.025,
-		"overrideModels": true,
-		"textureImportMode": 1
-	},
-	"vtflib": "C:/Users/LeV73/Desktop/Godot/abberation-game-jam/addons/godotvmf/3rdparty/vtflib"
+		"gameInfoPath": "C:/Steam/steamapps/sourcemods/mymod",
+		"vtflib": "C:/Steam/steamapps/sourcemods/mymod/tools/vtflib",
+		"mdl2obj": "C:/Steam/steamapps/sourcemods/mymod/tools/mdl2obj",
+		"modelsFolder": "res://Assets/Models",
+		"materialsFolder": "res://Assets/Materials",
+		"instancesFolder": "res://Assets/Instances",
+		"entitiesFolder": "res://Assets/Entities",
+		"nodeConfig": {
+			"importScale": 0.025,
+			"defaultTextureSize": 512,
+			"generateCollision": true,
+			"fallbackMaterial": null,
+			"ignoreTextures": ['TOOLS/TOOLSNODRAW'],
+			"textureImportMode": 1,
+			"importModels": false,
+			"generateCollisionForModel": true,
+			"overrideModels": true,
+		},
 	};
 
 	file.store_string(JSON.stringify(defaultConfig, "\t"));
