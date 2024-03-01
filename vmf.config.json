@@ -14,7 +14,7 @@
 			"TOOLS/TOOLSNODRAW"
 		],
 		"importModels": false,
-		"importScale": 0.025,
+		"importScale": 0.03,
 		"overrideModels": true,
 		"textureImportMode": 1
 	},
