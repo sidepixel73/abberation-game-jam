@@ -1,0 +1,22 @@
+{
+	"entitiesFolder": "res://addons/godotvmf/entities/",
+	"gameInfoPath": "S:/SteamLibrary/steamapps/common/Team Fortress 2/hl2/",
+	"instancesFolder": "res://addons/godotvmf/instances/",
+	"materialsFolder": "res://addons/godotvmf/materals/",
+	"mdl2obj": "C:/Users/LeV73/Desktop/Godot/abberation-game-jam/addons/godotvmf/3rdparty/mdl2obj/",
+	"modelsFolder": "res://addons/godotvmf/models/",
+	"nodeConfig": {
+		"defaultTextureSize": 512,
+		"fallbackMaterial": null,
+		"generateCollision": true,
+		"generateCollisionForModel": true,
+		"ignoreTextures": [
+			"TOOLS/TOOLSNODRAW"
+		],
+		"importModels": false,
+		"importScale": 0.025,
+		"overrideModels": true,
+		"textureImportMode": 1
+	},
+	"vtflib": "C:/Users/LeV73/Desktop/Godot/abberation-game-jam/addons/godotvmf/3rdparty/vtflib"
+}
