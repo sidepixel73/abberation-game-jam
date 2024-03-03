@@ -7,14 +7,14 @@ var def_weapon_holder_pos: Vector3
 var mouse_input : Vector2
 var weapon_rotation_amount : float = 0.2
 
-@onready var animTree = get_node("GunMeshAndAnimation/AnimationTree")
-var gunState = 0
+@onready var animTree : AnimationTree = $GunMeshAndAnimation/AnimationTree
+var idleList = ["idle", "idle_shot", "idle_reload"]
 
 
 func _ready():
 	# code for weapon movement
 	def_weapon_holder_pos = weapon_holder.position
-	animTree.set("parameters/Transition/transition_request", "state_0")
+	animTree.set("parameters/Transition/transition_request", "takeout")
 
 func _physics_process(delta):
 	# code for weapon movement
@@ -23,13 +23,33 @@ func _physics_process(delta):
 	weapon_tilt(input_dir.x, delta)
 
 func _input(event):
-	if event.is_action_pressed("testing_button"):
-		if gunState == 0:
-			animTree.set("parameters/Transition/transition_request", "state_2")
-			gunState = 1
-		else:
-			animTree.set("parameters/Transition/transition_request", "state_0")
-			gunState = 0
+	if event.is_action_pressed("shot"):
+		_anim_event("shot")
+	elif event.is_action_pressed("reload"):
+		_anim_event("reload")
+	elif event.is_action_pressed("second_shot"):
+		_inspect_event()
+	
+func _anim_event(animation : String):
+	if animTree.get("parameters/Inspect/active"):
+		animTree.set("parameters/Inspect/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+		animTree.set("parameters/Transition/transition_request", animation)
+		if animation == "shot":
+			$GunMeshAndAnimation/GunMesh/topPart/flash.visible = true
+			await get_tree().create_timer(0.1).timeout
+			$GunMeshAndAnimation/GunMesh/topPart/flash.visible = false
+	elif animTree.get("parameters/Transition/current_state") in idleList:
+		animTree.set("parameters/Transition/transition_request", animation)
+		if animation == "shot":
+			$GunMeshAndAnimation/GunMesh/topPart/flash.visible = true
+			await get_tree().create_timer(0.1).timeout
+			$GunMeshAndAnimation/GunMesh/topPart/flash.visible = false
+		
+
+func _inspect_event():
+	if animTree.get("parameters/Transition/current_state") in idleList:
+		animTree.set("parameters/Inspect/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
 
 func weapon_tilt(input_x, delta): # code for weapon movement
 	if weapon_holder:
