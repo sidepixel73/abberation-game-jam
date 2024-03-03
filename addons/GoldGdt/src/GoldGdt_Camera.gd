@@ -32,6 +32,7 @@ func _process(delta_) -> void:
 func _physics_process(delta_) -> void:
 	# Update the transforms.
 	_update_target()
+	$"Arm/Arm Anchor/SubViewportContainer/SubViewport/ViewmodelCamera".global_transform = global_transform
 	pass
 
 func _update_target() -> void:

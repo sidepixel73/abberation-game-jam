@@ -38,6 +38,6 @@ func _write_view_ui():
 func _write_body_ui():
 	var format = "Position: %s\nVelocity: %s\nSpeed: %s m/s (%s u/s)\nDucking: %s\nDucked: %s"
 	var h_vel = Vector2(Body.velocity.x, Body.velocity.z)
-	var str = format % [Body.global_position, Body.velocity, round(h_vel.length()), round(h_vel.length() * 39.37), Body.ducking, Body.ducked]
+	var str = format % [Body.global_position, Body.velocity.length(), round(h_vel.length()), round(h_vel.length() * 39.37), Body.ducking, Body.ducked]
 	BodyInfo.text = str
 	pass

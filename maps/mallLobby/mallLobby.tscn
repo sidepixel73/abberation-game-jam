@@ -15,7 +15,8 @@ sky_material = SubResource("ProceduralSkyMaterial_ut6hj")
 background_mode = 2
 sky = SubResource("Sky_1py2b")
 tonemap_mode = 2
-sdfgi_use_occlusion = true
+sdfgi_cascades = 1
+sdfgi_max_distance = 25.6
 sdfgi_y_scale = 0
 glow_enabled = true
 

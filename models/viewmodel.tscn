@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://1cgeee22xupc"]
+
+[ext_resource type="PackedScene" uid="uid://cogijmp56rtxl" path="res://models/mp412/mp_412_disconnected.tscn" id="1_iq6sj"]
+
+[node name="ViewmodelCamera" type="Camera3D"]
+cull_mask = 2
+fov = 54.0
+
+[node name="mp412" parent="." instance=ExtResource("1_iq6sj")]
