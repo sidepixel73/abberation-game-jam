@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdhhe0sa42euh"]
+
+[ext_resource type="Script" path="res://maps/dungeonFail/dungeon_generator.gd" id="1_81utp"]
+[ext_resource type="PackedScene" uid="uid://c5bfy6kbjn738" path="res://maps/dungeonFail/cube.tscn" id="2_x2va3"]
+[ext_resource type="PackedScene" uid="uid://bwovy85in866l" path="res://maps/dungeonFail/cube2.tscn" id="3_lyq2b"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2g62d"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_mjblr"]
+sky_material = SubResource("ProceduralSkyMaterial_2g62d")
+
+[sub_resource type="Environment" id="Environment_5h5qb"]
+background_mode = 2
+sky = SubResource("Sky_mjblr")
+
+[node name="DungeonGenerator" type="Node3D"]
+script = ExtResource("1_81utp")
+roomList = [ExtResource("2_x2va3"), ExtResource("3_lyq2b")]
+
+[node name="testingNode" type="Node" parent="."]
+
+[node name="testCamera" type="Camera3D" parent="testingNode"]
+transform = Transform3D(1, 0, 0, 0, 0.787548, 0.616253, 0, -0.616253, 0.787548, 0, 4.73708, 6.70462)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="testingNode"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="testingNode"]
+environment = SubResource("Environment_5h5qb")
+
+[node name="Button" type="Button" parent="testingNode"]
+offset_right = 97.0
+offset_bottom = 31.0
+text = "add a room"
+
+[node name="roomsContainer" type="Node3D" parent="."]
+
+[connection signal="pressed" from="testingNode/Button" to="." method="_on_button_pressed"]

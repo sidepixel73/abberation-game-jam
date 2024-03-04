@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwovy85in866l"]
+
+[ext_resource type="Script" path="res://maps/dungeonFail/connector_3d.gd" id="1_v1jbl"]
+[ext_resource type="Script" path="res://maps/dungeonFail/room.gd" id="1_yfyrm"]
+[ext_resource type="Material" uid="uid://bkb844xcht7gh" path="res://materials/green.tres" id="3_4magg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j3pfw"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k86lw"]
+size = Vector3(2, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y5sbw"]
+material = ExtResource("3_4magg")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 2.439
+radial_segments = 8
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xum3n"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qlpr"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="Cube" type="Node3D"]
+script = ExtResource("1_yfyrm")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("BoxMesh_j3pfw")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+mesh = SubResource("BoxMesh_k86lw")
+skeleton = NodePath("../..")
+
+[node name="Targets" type="Node3D" parent="."]
+
+[node name="Connector3D" type="Marker3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("1_v1jbl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Connector3D"]
+visible = false
+mesh = SubResource("CylinderMesh_y5sbw")
+
+[node name="Connector3D2" type="Marker3D" parent="Targets"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, -1.5)
+script = ExtResource("1_v1jbl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Connector3D2"]
+visible = false
+mesh = SubResource("CylinderMesh_y5sbw")
+surface_material_override/0 = SubResource("StandardMaterial3D_xum3n")
+
+[node name="Connector3D3" type="Marker3D" parent="Targets"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, -1.5)
+script = ExtResource("1_v1jbl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Connector3D3"]
+visible = false
+mesh = SubResource("CylinderMesh_y5sbw")
+surface_material_override/0 = SubResource("StandardMaterial3D_5qlpr")

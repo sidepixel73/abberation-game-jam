@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfcvttksu7f7x"]
+
+[ext_resource type="PackedScene" uid="uid://bk1exu1p74wrs" path="res://addons/GoldGdt/Pawn.tscn" id="1_yw4rq"]
+[ext_resource type="PackedScene" uid="uid://bdhhe0sa42euh" path="res://maps/dungeonFail/dungeon_generator.tscn" id="2_k4cb7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5ulna"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_k24gd"]
+sky_material = SubResource("ProceduralSkyMaterial_5ulna")
+
+[sub_resource type="Environment" id="Environment_it3sy"]
+background_mode = 2
+sky = SubResource("Sky_k24gd")
+
+[node name="Node" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_it3sy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Pawn" parent="." instance=ExtResource("1_yw4rq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="DungeonGenerator" parent="." instance=ExtResource("2_k4cb7")]
