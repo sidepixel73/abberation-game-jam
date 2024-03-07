@@ -32,26 +32,25 @@ func add_room():
 		room.translate(roomConnector.position * -1)
 		
 		#rotate room
-		var model = room.find_child("Model")
-		model.reparent(roomConnector)
-		for otherConnector : Connector3D in room.connectorList:
-			if !otherConnector.isOccupied:
-				otherConnector.reparent(roomConnector)
+		room._change_rotating_root(roomConnector)
+		print('RoomCon: ' + str(roomConnector.rotation_degrees[1]))
+		print('OpenCon: ' + str(openConnector.rotation_degrees[1]))
 		
-		
-		
+		"""if openConnector.rotation[1] == 0:
+			roomConnector.rotation_degrees[1] = 180
+		elif openConnector.rotation_degrees[1] > 0:
+			roomConnector.rotation_degrees[1] = 180 + openConnector.rotation_degrees[1]
+		else:
+			roomConnector.rotation_degrees[1] = - 180 + openConnector.rotation_degrees[1]"""
+		print('-------')
+		print('RoomCon: ' + str(roomConnector.rotation_degrees[1]))
+		print('OpenCon: ' + str(openConnector.rotation_degrees[1]))
+		print()
 
 func check_connectors(room : Room3D):
 	for connector : Connector3D in room.connectorList:
 			if !connector.isOccupied:
 				return connector
-
-func rotateAround(obj, point, axis, angle):
-	var rot = angle + obj.rotation.y 
-	var tStart = point
-	obj.global_translate (-tStart)
-	obj.transform = obj.transform.rotated(axis, -rot)
-	obj.global_translate (tStart)
 
 func _on_button_pressed():
 	add_room()
