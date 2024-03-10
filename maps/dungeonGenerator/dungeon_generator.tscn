@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdhhe0sa42euh"]
+[gd_scene load_steps=14 format=3 uid="uid://bdhhe0sa42euh"]
 
-[ext_resource type="Script" path="res://maps/dungeonFail/dungeon_generator.gd" id="1_81utp"]
-[ext_resource type="PackedScene" uid="uid://c5bfy6kbjn738" path="res://maps/dungeonFail/cube.tscn" id="2_x2va3"]
-[ext_resource type="PackedScene" uid="uid://bwovy85in866l" path="res://maps/dungeonFail/cube2.tscn" id="3_lyq2b"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/dungeon_generator.gd" id="1_81utp"]
+[ext_resource type="PackedScene" uid="uid://c5bfy6kbjn738" path="res://maps/dungeonGenerator/cube.tscn" id="2_x2va3"]
+[ext_resource type="PackedScene" uid="uid://bwovy85in866l" path="res://maps/dungeonGenerator/cube2.tscn" id="3_lyq2b"]
 [ext_resource type="Texture2D" uid="uid://ccw7qq5iwaf62" path="res://materials/rotation.png" id="4_b28lc"]
+[ext_resource type="PackedScene" uid="uid://dld85la4et5eg" path="res://maps/dungeonGenerator/cube3.tscn" id="4_ilx82"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2g62d"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,12 +38,7 @@ script/source = "extends Node3D
 func _on_h_slider_value_changed(value):
 	label.text = str(mesh2.rotation_degrees[1]) + '<->' + str(mesh1.rotation_degrees[1])
 	mesh1.rotation_degrees[1] = value
-	if mesh1.rotation[1] == 0:
-		mesh2.rotation_degrees[1] = 180
-	elif mesh1.rotation_degrees[1] > 0:
-		mesh2.rotation_degrees[1] = 180 + mesh1.rotation_degrees[1]
-	else:
-		mesh2.rotation_degrees[1] = - 180 + mesh1.rotation_degrees[1]
+	
 
 
 "
@@ -58,7 +54,7 @@ size = Vector3(1, 1, 3)
 
 [node name="DungeonGenerator" type="Node3D"]
 script = ExtResource("1_81utp")
-roomList = [ExtResource("2_x2va3"), ExtResource("3_lyq2b")]
+roomList = [ExtResource("2_x2va3"), ExtResource("3_lyq2b"), ExtResource("4_ilx82")]
 
 [node name="testingNode" type="Node" parent="."]
 
@@ -74,6 +70,7 @@ environment = SubResource("Environment_5h5qb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="testingNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
 mesh = SubResource("QuadMesh_tsai7")
 
 [node name="Control" type="Control" parent="testingNode"]
@@ -112,6 +109,7 @@ offset_right = 1143.0
 offset_bottom = 601.0
 
 [node name="Node3D" type="Node3D" parent="testingNode" node_paths=PackedStringArray("mesh1", "mesh2")]
+visible = false
 script = SubResource("GDScript_tc11f")
 mesh1 = NodePath("MeshInstance3D")
 mesh2 = NodePath("MeshInstance3D2")

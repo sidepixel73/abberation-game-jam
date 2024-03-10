@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwovy85in866l"]
 
-[ext_resource type="Script" path="res://maps/dungeonFail/connector_3d.gd" id="1_v1jbl"]
-[ext_resource type="Script" path="res://maps/dungeonFail/room.gd" id="1_yfyrm"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/connector_3d.gd" id="1_v1jbl"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/room.gd" id="1_yfyrm"]
 [ext_resource type="Material" uid="uid://bkb844xcht7gh" path="res://materials/green.tres" id="3_4magg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_j3pfw"]
@@ -24,8 +24,10 @@ albedo_color = Color(0, 0, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qlpr"]
 albedo_color = Color(0, 1, 1, 1)
 
-[node name="Cube" type="Node3D"]
+[node name="Cube" type="Node3D" node_paths=PackedStringArray("connectorNodes", "roomModelAndEntities")]
 script = ExtResource("1_yfyrm")
+connectorNodes = NodePath("Targets")
+roomModelAndEntities = NodePath("Model")
 
 [node name="Model" type="Node3D" parent="."]
 

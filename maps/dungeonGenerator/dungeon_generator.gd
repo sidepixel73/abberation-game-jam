@@ -33,18 +33,12 @@ func add_room():
 		
 		#rotate room
 		room._change_rotating_root(roomConnector)
-		print('RoomCon: ' + str(roomConnector.rotation_degrees[1]))
-		print('OpenCon: ' + str(openConnector.rotation_degrees[1]))
-		
-		"""if openConnector.rotation[1] == 0:
-			roomConnector.rotation_degrees[1] = 180
-		elif openConnector.rotation_degrees[1] > 0:
-			roomConnector.rotation_degrees[1] = 180 + openConnector.rotation_degrees[1]
-		else:
-			roomConnector.rotation_degrees[1] = - 180 + openConnector.rotation_degrees[1]"""
+		print('RoomCon: ' + str(roomConnector.global_rotation[1]))
+		print('OpenCon: ' + str(openConnector.global_rotation[1]))
+		roomConnector.global_rotation[1] = openConnector.global_rotation[1] + PI
 		print('-------')
-		print('RoomCon: ' + str(roomConnector.rotation_degrees[1]))
-		print('OpenCon: ' + str(openConnector.rotation_degrees[1]))
+		print('RoomCon: ' + str(roomConnector.global_rotation[1]))
+		print('OpenCon: ' + str(openConnector.global_rotation[1]))
 		print()
 
 func check_connectors(room : Room3D):

@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dld85la4et5eg"]
+
+[ext_resource type="Script" path="res://maps/dungeonGenerator/room.gd" id="1_uwy5q"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/connector_3d.gd" id="2_fpyxt"]
+
+[node name="Cube" type="Node3D" node_paths=PackedStringArray("connectorNodes", "roomModelAndEntities")]
+script = ExtResource("1_uwy5q")
+connectorNodes = NodePath("Targets")
+roomModelAndEntities = NodePath("Model")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model"]
+size = Vector3(1, 1, 4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Model"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.707027, 0, -1.96852)
+size = Vector3(1.37946, 1, 2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Model"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -1.62826, 0, -3.13802)
+size = Vector3(1, 1, 6)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.60277, 0, -2.87095)
+size = Vector3(1, 1, 3)
+
+[node name="Targets" type="Node3D" parent="."]
+editor_description = "Duplicate connectors and then move them to their respective places"
+
+[node name="Connector3D" type="Marker3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+script = ExtResource("2_fpyxt")
+
+[node name="Connector3D2" type="Marker3D" parent="Targets"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0.516062, 0, -5.23136)
+script = ExtResource("2_fpyxt")
+
+[node name="Connector3D3" type="Marker3D" parent="Targets"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.611, 0, -4.3698)
+script = ExtResource("2_fpyxt")

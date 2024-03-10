@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5bfy6kbjn738"]
+[gd_scene load_steps=8 format=3 uid="uid://hef8akhl0n13"]
 
-[ext_resource type="Script" path="res://maps/dungeonFail/connector_3d.gd" id="1_58oqk"]
-[ext_resource type="Script" path="res://maps/dungeonFail/room.gd" id="1_514m7"]
-[ext_resource type="Material" uid="uid://bkb844xcht7gh" path="res://materials/green.tres" id="3_txqbw"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/room.gd" id="1_b2gqh"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/connector_3d.gd" id="2_2qxya"]
+[ext_resource type="Material" uid="uid://bkb844xcht7gh" path="res://materials/green.tres" id="3_vlkwb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_j3pfw"]
 size = Vector3(1, 1, 2)
@@ -12,7 +12,7 @@ margin = 0.0
 size = Vector3(1, 1, 2)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hnuy7"]
-material = ExtResource("3_txqbw")
+material = ExtResource("3_vlkwb")
 top_radius = 0.05
 bottom_radius = 0.05
 height = 2.439
@@ -22,8 +22,10 @@ rings = 1
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sywbm"]
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="Cube" type="Node3D"]
-script = ExtResource("1_514m7")
+[node name="Cube" type="Node3D" node_paths=PackedStringArray("connectorNodes", "roomModelAndEntities")]
+script = ExtResource("1_b2gqh")
+connectorNodes = NodePath("Targets")
+roomModelAndEntities = NodePath("Model")
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -38,10 +40,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00210571)
 shape = SubResource("BoxShape3D_4cwpp")
 
 [node name="Targets" type="Node3D" parent="."]
+editor_description = "Duplicate connectors and then move them to their respective places"
 
 [node name="Connector3D" type="Marker3D" parent="Targets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-script = ExtResource("1_58oqk")
+script = ExtResource("2_2qxya")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Targets/Connector3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -52,7 +55,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_sywbm")
 
 [node name="Connector3D2" type="Marker3D" parent="Targets"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1)
-script = ExtResource("1_58oqk")
+script = ExtResource("2_2qxya")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Connector3D2"]
 visible = false
