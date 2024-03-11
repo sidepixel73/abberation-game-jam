@@ -2,7 +2,7 @@
 
 > Currently an experiment by LeV73, used to test my skill to make games. Right now, it very early indev, with dungeon mechanic being WIP and not much gun action
 
-**USED** to be made for [Acerola Jam 0](https://itch.io/jam/acerola-jam-0), now i just don't have enough time for it
+**USED** to be made for [Acerola Jam 0](https://itch.io/jam/acerola-jam-0), now i just make it on my "spare" time
 
 Made by Lev "LeV73" Borovoi, using Godot Engine
 
