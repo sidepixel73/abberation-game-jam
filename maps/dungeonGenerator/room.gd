@@ -3,6 +3,7 @@ class_name Room3D extends Node3D
 var connectorList : Array
 @export var connectorNodes : Node3D
 @export var roomModelAndEntities : Node3D
+@onready var roomBounderies = roomModelAndEntities.get_node("roomBounderies")
 
 func _fill_con_list() -> void:
 	if len(connectorList) == 0:
@@ -23,3 +24,7 @@ func _change_rotating_root(connector : Connector3D) -> void:
 		_fill_con_list()
 	else:
 		printerr("No connector in the list!")
+
+func _on_room_bounderies_area_entered(_area):
+	queue_free()
+	# get_node("/root/DungeonGenerator").add_room()

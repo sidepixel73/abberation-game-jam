@@ -1,16 +1,21 @@
 extends Node3D
 
 @export var roomList = []
-@onready var roomContainer = get_node("roomsContainer")
+@export var roomContainer : Node3D
+var toggleGenerator : bool = false
+var ppCount : float = 0.0
 
-func add_room():
+func add_room() -> void:
 	randomize()
 	if roomContainer.get_child_count() == 0:
 		var room : Room3D = roomList.pick_random().instantiate()
 		room._fill_con_list()
 		roomContainer.add_child(room)
+		room.roomBounderies.monitoring = false
 	else:
-		var existingRoom = roomContainer.get_children().pick_random()  # before instantiating
+		var roomContainerArray = roomContainer.get_children()
+		roomContainerArray[roomContainer.get_child_count() - 1].roomBounderies.monitoring = false
+		var existingRoom = roomContainerArray.pick_random()  # before instantiating
 		var openConnector : Connector3D
 		
 		while openConnector == null:
@@ -33,13 +38,8 @@ func add_room():
 		
 		#rotate room
 		room._change_rotating_root(roomConnector)
-		print('RoomCon: ' + str(roomConnector.global_rotation[1]))
-		print('OpenCon: ' + str(openConnector.global_rotation[1]))
 		roomConnector.global_rotation[1] = openConnector.global_rotation[1] + PI
-		print('-------')
-		print('RoomCon: ' + str(roomConnector.global_rotation[1]))
-		print('OpenCon: ' + str(openConnector.global_rotation[1]))
-		print()
+
 
 func check_connectors(room : Room3D):
 	for connector : Connector3D in room.connectorList:
@@ -49,3 +49,12 @@ func check_connectors(room : Room3D):
 func _on_button_pressed():
 	add_room()
 
+func _on_generate_pressed():
+	toggleGenerator = !toggleGenerator
+
+func _physics_process(delta):
+	if toggleGenerator and ppCount > 0.2:
+		ppCount = 0.0
+		add_room()
+	else:
+		ppCount += delta

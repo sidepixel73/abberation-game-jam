@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwovy85in866l"]
+[gd_scene load_steps=11 format=3 uid="uid://bwovy85in866l"]
 
 [ext_resource type="Script" path="res://maps/dungeonGenerator/connector_3d.gd" id="1_v1jbl"]
 [ext_resource type="Script" path="res://maps/dungeonGenerator/room.gd" id="1_yfyrm"]
@@ -9,6 +9,14 @@ size = Vector3(1, 1, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_k86lw"]
 size = Vector3(2, 1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hm0nj"]
+margin = 0.0
+points = PackedVector3Array(0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j74vc"]
+margin = 0.0
+points = PackedVector3Array(1, 0.5, 0.5, 1, 0.5, -0.5, -1, 0.5, 0.5, 1, -0.5, 0.5, 1, -0.5, -0.5, -1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_y5sbw"]
 material = ExtResource("3_4magg")
@@ -40,6 +48,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 mesh = SubResource("BoxMesh_k86lw")
 skeleton = NodePath("../..")
 
+[node name="roomBounderies" type="Area3D" parent="Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/roomBounderies"]
+transform = Transform3D(0.970235, 0, 0, 0, 0.970235, 0, 0, 0, 0.970235, 0, 0, -0.0223237)
+shape = SubResource("ConvexPolygonShape3D_hm0nj")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/roomBounderies"]
+transform = Transform3D(0.970235, 0, 0, 0, 0.970235, 0, 0, 0, 0.970235, 0, 0, -1.50733)
+shape = SubResource("ConvexPolygonShape3D_j74vc")
+
 [node name="Targets" type="Node3D" parent="."]
 
 [node name="Connector3D" type="Marker3D" parent="Targets"]
@@ -67,3 +85,5 @@ script = ExtResource("1_v1jbl")
 visible = false
 mesh = SubResource("CylinderMesh_y5sbw")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qlpr")
+
+[connection signal="area_entered" from="Model/roomBounderies" to="." method="_on_room_bounderies_area_entered"]

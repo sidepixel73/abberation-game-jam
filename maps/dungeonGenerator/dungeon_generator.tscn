@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdhhe0sa42euh"]
+[gd_scene load_steps=8 format=3 uid="uid://bdhhe0sa42euh"]
 
 [ext_resource type="Script" path="res://maps/dungeonGenerator/dungeon_generator.gd" id="1_81utp"]
 [ext_resource type="PackedScene" uid="uid://c5bfy6kbjn738" path="res://maps/dungeonGenerator/cube.tscn" id="2_x2va3"]
 [ext_resource type="PackedScene" uid="uid://bwovy85in866l" path="res://maps/dungeonGenerator/cube2.tscn" id="3_lyq2b"]
-[ext_resource type="Texture2D" uid="uid://ccw7qq5iwaf62" path="res://materials/rotation.png" id="4_b28lc"]
 [ext_resource type="PackedScene" uid="uid://dld85la4et5eg" path="res://maps/dungeonGenerator/cube3.tscn" id="4_ilx82"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2g62d"]
@@ -17,49 +16,16 @@ sky_material = SubResource("ProceduralSkyMaterial_2g62d")
 background_mode = 2
 sky = SubResource("Sky_mjblr")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mxbc"]
-transparency = 1
-blend_mode = 1
-albedo_texture = ExtResource("4_b28lc")
-
-[sub_resource type="QuadMesh" id="QuadMesh_tsai7"]
-material = SubResource("StandardMaterial3D_3mxbc")
-size = Vector2(5, 5)
-orientation = 1
-
-[sub_resource type="GDScript" id="GDScript_tc11f"]
-script/source = "extends Node3D
-
-@export var mesh1 : MeshInstance3D
-@export var mesh2 : MeshInstance3D
-@onready var label = $\"../Control/Label\"
-
-
-func _on_h_slider_value_changed(value):
-	label.text = str(mesh2.rotation_degrees[1]) + '<->' + str(mesh1.rotation_degrees[1])
-	mesh1.rotation_degrees[1] = value
-	
-
-
-"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ep57i"]
-albedo_texture = ExtResource("4_b28lc")
-uv1_scale = Vector3(0.455, 0.455, 0.455)
-uv1_offset = Vector3(-0.105, 0.135, 0)
-
-[sub_resource type="BoxMesh" id="BoxMesh_yxikv"]
-material = SubResource("StandardMaterial3D_ep57i")
-size = Vector3(1, 1, 3)
-
-[node name="DungeonGenerator" type="Node3D"]
+[node name="DungeonGenerator" type="Node3D" node_paths=PackedStringArray("roomContainer")]
 script = ExtResource("1_81utp")
 roomList = [ExtResource("2_x2va3"), ExtResource("3_lyq2b"), ExtResource("4_ilx82")]
+roomContainer = NodePath("roomsContainer")
 
 [node name="testingNode" type="Node" parent="."]
 
 [node name="testCamera" type="Camera3D" parent="testingNode"]
-transform = Transform3D(1, 0, 0, 0, 0.787548, 0.616253, 0, -0.616253, 0.787548, 0, 4.73708, 6.70462)
+transform = Transform3D(-4.37114e-08, -0.681998, 0.731354, 0, 0.731354, 0.681998, -1, 2.98111e-08, -3.19685e-08, 31.57, 25.155, 4.695)
+size = 100.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="testingNode"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -67,11 +33,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="testingNode"]
 environment = SubResource("Environment_5h5qb")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="testingNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visible = false
-mesh = SubResource("QuadMesh_tsai7")
 
 [node name="Control" type="Control" parent="testingNode"]
 layout_mode = 3
@@ -87,42 +48,15 @@ offset_right = 97.0
 offset_bottom = 31.0
 text = "add a room"
 
-[node name="HSlider" type="HSlider" parent="testingNode/Control"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -288.0
-offset_top = -49.0
-grow_horizontal = 0
-grow_vertical = 0
-min_value = -360.0
-max_value = 360.0
-
-[node name="Label" type="Label" parent="testingNode/Control"]
+[node name="Button2" type="Button" parent="testingNode/Control"]
 layout_mode = 0
-offset_left = 936.0
-offset_top = 571.0
-offset_right = 1143.0
-offset_bottom = 601.0
-
-[node name="Node3D" type="Node3D" parent="testingNode" node_paths=PackedStringArray("mesh1", "mesh2")]
-visible = false
-script = SubResource("GDScript_tc11f")
-mesh1 = NodePath("MeshInstance3D")
-mesh2 = NodePath("MeshInstance3D2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="testingNode/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-mesh = SubResource("BoxMesh_yxikv")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="testingNode/Node3D"]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -2, 0, 0)
-mesh = SubResource("BoxMesh_yxikv")
+offset_left = 1.0
+offset_top = 35.0
+offset_right = 83.0
+offset_bottom = 66.0
+text = "generate!"
 
 [node name="roomsContainer" type="Node3D" parent="."]
 
 [connection signal="pressed" from="testingNode/Control/Button" to="." method="_on_button_pressed"]
-[connection signal="value_changed" from="testingNode/Control/HSlider" to="testingNode/Node3D" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="testingNode/Control/Button2" to="." method="_on_generate_pressed"]
