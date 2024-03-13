@@ -16,7 +16,7 @@ static func define_alias(name: String, value: Node):
 
 var config:
 	get:
-		return VMFConfig.getConfig().nodeConfig;
+		return VMFConfig.config;
 
 static var aliases: Dictionary = {};
 
@@ -36,26 +36,29 @@ func Kill(_param = null):
 func _entity_ready():
 	pass;
 
+func _reparent():
+	if not "parentname" in entity:
+		return;
+
+	var parentNode = get_target(entity.parentname);
+
+	if parentNode:
+		call_deferred("reparent", parentNode, true);
+
 func _ready():
 	if Engine.is_editor_hint():
 		return;
 
 	parse_connections();
 	
-	if "parentname" in entity:
-		var parentNode = get_target(entity.parentname);
-
-		if parentNode:
-			var posDiff = parentNode.global_position - position;
-			call_deferred("reparent", parentNode, false);
-			position = -posDiff;
 
 	ValveIONode.namedEntities[name] = self;
 
 	if "StartDisabled" in entity and entity.StartDisabled == 1:
 		enabled = false;
 
-	_entity_ready();
+	_reparent();
+	call_deferred("_entity_ready");
 
 func _apply_entity(ent, config):
 	self.entity = ent;
@@ -198,12 +201,9 @@ func get_mesh() -> ArrayMesh:
 			'solid': solids,
 		},
 	};
-
-	var config = VMFConfig.getConfig().nodeConfig;
 	var offset = entity.origin if "origin" in entity else Vector3.ZERO;
 
-	var fallbackMaterial = load(config.fallbackMaterial) \
-			if config.fallbackMaterial && ResourceLoader.exists(config.fallbackMaterial) else null;
+	var fallbackMaterial = config.material.fallbackMaterial;
 
 	return VMFTool.createMesh(struct, offset);
 
@@ -212,6 +212,15 @@ func convert_vector(v):
 
 func convert_direction(v):
 	return Vector3(v.z, v.y, -v.x) / 180.0 * PI;
+
+func get_movement_vector(v):
+	var _basis = Basis.from_euler(Vector3(v.x, -v.y, -v.z) / 180.0 * PI);
+	var movement = _basis.z;
+
+	return Vector3(movement.z, movement.y, movement.x);
+
+func get_value(field, fallback):
+	return entity[field] if field in entity else fallback;
 
 ## Returns the shape of the entity that depends on solids that it have
 func get_entity_shape():

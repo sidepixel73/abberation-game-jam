@@ -8,7 +8,7 @@ var ppCount : float = 0.0
 func add_room() -> void:
 	randomize()
 	if roomContainer.get_child_count() == 0:
-		var room : Room3D = roomList.pick_random().instantiate()
+		var room : Room3D = roomList[0].instantiate()
 		room._fill_con_list()
 		roomContainer.add_child(room)
 		room.roomBounderies.monitoring = false
@@ -24,7 +24,7 @@ func add_room() -> void:
 				existingRoom = roomContainer.get_children().pick_random()
 		# maybe when no connections left do something
 		
-		var room : Room3D = roomList.pick_random().instantiate()
+		var room : Room3D = roomList[RandomNumberGenerator.new().randi_range(1, len(roomList) - 1)].instantiate()
 		room._fill_con_list()
 		var roomConnector : Connector3D = room.connectorList.pick_random()
 		roomContainer.add_child(room)
@@ -51,6 +51,10 @@ func _on_button_pressed():
 
 func _on_generate_pressed():
 	toggleGenerator = !toggleGenerator
+
+func _input(event):
+	if event.is_action_pressed("testing_button"):
+		add_room()
 
 func _physics_process(delta):
 	if toggleGenerator and ppCount > 0.2:

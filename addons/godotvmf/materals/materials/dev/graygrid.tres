@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cby8l0jb8uhy0"]
+
+[ext_resource type="Shader" path="res://addons/godotvmf/materals/BlendStandardMaterial.gdshader" id="1_gjncy"]
+[ext_resource type="Texture2D" uid="uid://hs32hj5kic6q" path="res://addons/godotvmf/materals/materials/dev/graygrid.png" id="2_yl6u2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gjncy")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_color2 = Color(1, 1, 1, 1)
+shader_parameter/point_size = null
+shader_parameter/roughness = null
+shader_parameter/metallic = null
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = null
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("2_yl6u2")

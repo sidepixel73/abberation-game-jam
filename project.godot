@@ -19,6 +19,19 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/GoldGdt/plugin.cfg", "res://addons/godotvmf/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://docs/": "gray",
+"res://examples/": "gray",
+"res://maps/": "green",
+"res://materials/": "blue",
+"res://mdl2obj/": "gray",
+"res://models/": "teal",
+"res://sounds/": "orange"
+}
+
 [input]
 
 pm_moveforward={

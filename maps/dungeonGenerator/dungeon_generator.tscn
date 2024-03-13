@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdhhe0sa42euh"]
+[gd_scene load_steps=9 format=3 uid="uid://bdhhe0sa42euh"]
 
 [ext_resource type="Script" path="res://maps/dungeonGenerator/dungeon_generator.gd" id="1_81utp"]
-[ext_resource type="PackedScene" uid="uid://c5bfy6kbjn738" path="res://maps/dungeonGenerator/cube.tscn" id="2_x2va3"]
-[ext_resource type="PackedScene" uid="uid://bwovy85in866l" path="res://maps/dungeonGenerator/cube2.tscn" id="3_lyq2b"]
-[ext_resource type="PackedScene" uid="uid://dld85la4et5eg" path="res://maps/dungeonGenerator/cube3.tscn" id="4_ilx82"]
+[ext_resource type="PackedScene" uid="uid://ss5h7hoq0h0s" path="res://maps/dungeonGenerator/rooms/dev_start_dungeontest.tscn" id="2_hwb37"]
+[ext_resource type="PackedScene" uid="uid://dkmesaqyh2pa" path="res://maps/dungeonGenerator/rooms/dev_corridor_dungeonTest.tscn" id="3_506vd"]
+[ext_resource type="PackedScene" uid="uid://cw3yalot4h3af" path="res://maps/dungeonGenerator/rooms/dev_high_point_dungeonTest.tscn" id="4_tdymd"]
+[ext_resource type="PackedScene" uid="uid://culq6efg8rbdj" path="res://maps/dungeonGenerator/rooms/dev_treeRoom_dungeonTest.tscn" id="5_0spjm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2g62d"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,13 +19,13 @@ sky = SubResource("Sky_mjblr")
 
 [node name="DungeonGenerator" type="Node3D" node_paths=PackedStringArray("roomContainer")]
 script = ExtResource("1_81utp")
-roomList = [ExtResource("2_x2va3"), ExtResource("3_lyq2b"), ExtResource("4_ilx82")]
+roomList = [ExtResource("2_hwb37"), ExtResource("3_506vd"), ExtResource("4_tdymd"), ExtResource("5_0spjm")]
 roomContainer = NodePath("roomsContainer")
 
 [node name="testingNode" type="Node" parent="."]
 
 [node name="testCamera" type="Camera3D" parent="testingNode"]
-transform = Transform3D(-4.37114e-08, -0.681998, 0.731354, 0, 0.731354, 0.681998, -1, 2.98111e-08, -3.19685e-08, 31.57, 25.155, 4.695)
+transform = Transform3D(-0.992546, -0.0831147, 0.0891296, 0, 0.731354, 0.681998, -0.121869, 0.676915, -0.725902, 170.152, 152.255, 4.695)
 size = 100.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="testingNode"]
@@ -44,16 +45,18 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="testingNode/Control"]
 layout_mode = 1
-offset_right = 97.0
-offset_bottom = 31.0
+offset_left = 1037.0
+offset_top = 18.0
+offset_right = 1134.0
+offset_bottom = 49.0
 text = "add a room"
 
 [node name="Button2" type="Button" parent="testingNode/Control"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 35.0
-offset_right = 83.0
-offset_bottom = 66.0
+offset_left = 1038.0
+offset_top = 53.0
+offset_right = 1120.0
+offset_bottom = 84.0
 text = "generate!"
 
 [node name="roomsContainer" type="Node3D" parent="."]

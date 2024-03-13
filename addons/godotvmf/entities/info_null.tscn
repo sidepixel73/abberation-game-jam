@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://btppicj6x00ca"]
+
+[ext_resource type="Script" path="res://addons/godotvmf/entities/info_null.gd" id="1_aqj5y"]
+[ext_resource type="Script" path="res://maps/dungeonGenerator/connector_3d.gd" id="2_sn8i7"]
+
+[node name="InfoNull" type="Node3D"]
+script = ExtResource("1_aqj5y")
+
+[node name="Connector3D" type="Marker3D" parent="."]
+script = ExtResource("2_sn8i7")
